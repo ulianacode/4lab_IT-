@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:letatelniyapparat.ViewModels"
+        x:Class="letatelniyapparat.Views.MainWindow"
+        Title="Управление летательными аппаратами" Width="400" Height="450"
+        x:DataType="vm:MainWindowViewModel">
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
+        <TextBlock Text="Управление летательными аппаратами" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
+
+        <TextBlock Text="Выберите тип летательного аппарата:" FontSize="14" />
+        <ComboBox SelectedIndex="{Binding SelectedAircraftType}" Width="200">
+            <ComboBoxItem Content="Самолет" />
+            <ComboBoxItem Content="Вертолет" />
+        </ComboBox>
+        <StackPanel IsVisible="{Binding IsAirplaneSelected}">
+            <TextBlock Text="Введите длину взлетной полосы (в метрах) для самолёта, а для вертолета высоту до площадки:" FontSize="14" />
+            <TextBox Watermark="Например, 1200" Text="{Binding RunwayLength, Mode=TwoWay}" Width="200" />
+        </StackPanel>
+
+        <Button Content="Взлет" Command="{Binding TakeOffCommand}" Width="100" Margin="0,10,0,0" />
+        
+        <Button Content="Посадка" Command="{Binding LandCommand}" Width="100" />
+
+        <TextBlock Text="{Binding StatusMessage}" FontSize="14" TextAlignment="Center" Margin="0,20,0,0" Foreground="Green" />
+
+        <StackPanel Margin="0,20,0,0">
+            <TextBlock Text="Инструкция:" FontSize="14" FontWeight="Bold" />
+            <TextBlock Text="1. Выберите тип летательного аппарата." FontSize="12" />
+            <TextBlock Text="2. Для самолета введите длину взлетной полосы." FontSize="12" />
+            <TextBlock Text="3. Для вертолета введите высоту до площадки." FontSize="12" />
+            <TextBlock Text="4. Нажмите 'Взлет', чтобы поднять аппарат в воздух." FontSize="12" />
+            <TextBlock Text="5. Нажмите 'Посадка', чтобы посадить аппарат." FontSize="12" />
+        </StackPanel>
+    </StackPanel>
+</Window>
